@@ -302,101 +302,87 @@
             margin: 4px 11px;
         }
 
-        /* Footer Section Styling (Updated according to image) */
+        /* Exact Footer Design matching image */
         .footer {
             background-color: #f8f9fa;
-            border-top: 1px solid #e5e7eb;
             padding: 30px 20px 20px;
             text-align: center;
             margin-top: 40px;
         }
 
-        .footer-section {
+        .footer-block {
+            border-top: 1px solid #e2e8f0;
+            padding-top: 20px;
             margin-bottom: 25px;
         }
 
-        .footer-section h3 {
-            font-size: 16px;
+        .footer-block h3 {
+            font-size: 18px;
             font-weight: 700;
-            color: #111827;
-            margin-bottom: 12px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid #e5e7eb;
-            display: inline-block;
-            width: 100%;
-            max-width: 350px;
+            color: #222222;
+            margin-bottom: 18px;
         }
 
-        .footer-links {
+        .footer-links-list {
             list-style: none;
             padding: 0;
             margin: 0;
         }
 
-        .footer-links li {
-            margin-bottom: 10px;
+        .footer-links-list li {
+            margin-bottom: 16px;
         }
 
-        .footer-links a {
-            color: #4b5563;
+        .footer-links-list a {
+            color: #4a5568;
             text-decoration: none;
-            font-size: 14px;
+            font-size: 16px;
             font-weight: 500;
-            transition: color 0.2s;
+            display: inline-block;
         }
 
-        .footer-links a.green-link {
-            color: #00875a;
-            font-weight: 700;
-        }
-
-        .footer-links a.email-link {
-            color: #2b82b3;
+        .footer-links-list a.email-link {
+            color: #2b6cb0;
             text-decoration: underline;
         }
 
-        .footer-logos {
+        .footer-links-list a.highlight-green {
+            color: #00875a;
+            font-weight: 700;
+            border-bottom: 2px solid #00875a;
+            padding-bottom: 2px;
+        }
+
+        .footer-logos-container {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 40px;
+            gap: 30px;
             margin: 30px 0 20px;
             flex-wrap: wrap;
         }
 
-        .ministry-logo {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .chambers-logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .copyright-text {
-            font-size: 14px;
+        .copyright-title {
+            font-size: 15px;
             font-weight: 700;
-            color: #111827;
+            color: #1a202c;
             margin-bottom: 6px;
         }
 
-        .sub-copyright {
-            font-size: 12px;
-            color: #4b5563;
+        .copyright-subtitle {
+            font-size: 13px;
+            color: #718096;
         }
 
         /* Floating WhatsApp Button */
-        .floating-chat {
+        .floating-chat-btn {
             position: fixed;
             bottom: 20px;
             right: 20px;
             background-color: #00875a;
             color: #ffffff;
-            width: 52px;
-            height: 52px;
+            width: 54px;
+            height: 54px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -411,15 +397,12 @@
             .details-grid {
                 grid-template-columns: 1fr;
             }
-            .footer-logos {
-                gap: 20px;
-            }
         }
     </style>
 </head>
 <body>
 
-    <!-- 404 / Connection Not Private Error Screen (Hidden initially) -->
+    <!-- Error Screen (Shows automatically after 24 Hours) -->
     <div id="error-screen">
         <div class="error-container">
             <div class="error-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
@@ -431,7 +414,7 @@
         </div>
     </div>
 
-    <!-- Main Web Content Wrapper -->
+    <!-- Main Web Page Container -->
     <div id="main-app-content">
 
         <!-- Top Header Bar -->
@@ -463,7 +446,7 @@
             </div>
         </header>
 
-        <!-- Main Content -->
+        <!-- Main Body Content -->
         <main class="page-content">
             
             <!-- Document Result Card -->
@@ -476,7 +459,7 @@
                     </div>
                 </div>
 
-                <!-- Grid Items -->
+                <!-- Data Grid -->
                 <div class="details-grid">
                     <div class="detail-item">
                         <div class="icon-box"><i class="fa-regular fa-building"></i></div>
@@ -551,14 +534,14 @@
                     </div>
                 </div>
 
-                <!-- Action Buttons -->
+                <!-- Buttons -->
                 <div class="card-actions">
                     <button class="btn btn-primary">تحميل الوثيقة</button>
                     <button class="btn btn-secondary">إعادة تحقق</button>
                 </div>
             </section>
 
-            <!-- Timeline Steps Card -->
+            <!-- Timeline Card -->
             <section class="card timeline-container">
                 <div class="timeline-step">
                     <div class="step-circle"><i class="fa-solid fa-check"></i></div>
@@ -591,91 +574,90 @@
 
         </main>
 
-        <!-- Footer Section -->
+        <!-- Footer Section Exact Match -->
         <footer class="footer">
             
-            <!-- أقسام مهمة -->
-            <div class="footer-section">
+            <!-- Block 1: أقسام مهمة -->
+            <div class="footer-block">
                 <h3>أقسام مهمة</h3>
-                <ul class="footer-links">
+                <ul class="footer-links-list">
                     <li><a href="#">الأسئلة الشائعة</a></li>
                     <li><a href="#">سياسة الخصوصية</a></li>
                     <li><a href="#">الشروط والأحكام</a></li>
                 </ul>
             </div>
 
-            <!-- روابط أخرى -->
-            <div class="footer-section">
+            <!-- Block 2: روابط أخرى -->
+            <div class="footer-block">
                 <h3>روابط أخرى</h3>
-                <ul class="footer-links">
+                <ul class="footer-links-list">
                     <li><a href="mailto:HD@elm.sa" class="email-link">HD@elm.sa</a></li>
                 </ul>
             </div>
 
-            <!-- روابط خارجية -->
-            <div class="footer-section">
+            <!-- Block 3: روابط خارجية -->
+            <div class="footer-block">
                 <h3>روابط خارجية</h3>
-                <ul class="footer-links">
-                    <li><a href="#" class="green-link">وزارة التجارة</a></li>
+                <ul class="footer-links-list">
+                    <li><a href="#" class="highlight-green">وزارة التجارة</a></li>
                     <li><a href="#">وزارة الصناعة والثروة المعدنية</a></li>
                     <li><a href="#">هيئة الزكاة والضريبة والجمارك</a></li>
                     <li><a href="#">الموارد البشرية والتنمية الاجتماعية</a></li>
                 </ul>
             </div>
 
-            <!-- Logos -->
-            <div class="footer-logos">
-                <!-- Ministry of Commerce Logo -->
-                <div class="ministry-logo">
-                    <div style="background-color: #005a36; padding: 6px; border-radius: 4px; display: flex; align-items: center; justify-content: center; width: 42px; height: 42px;">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.5">
+            <!-- Bottom Logos -->
+            <div class="footer-logos-container">
+                <!-- Ministry Logo -->
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <div style="background-color: #005a36; padding: 6px; border-radius: 4px; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px;">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.5">
                             <path d="M12 2L12 15M12 15L9 12M12 15L15 12" />
                             <path d="M6 10C6 10 9 7 12 10C15 7 18 10 18 10" />
                             <path d="M8 20L16 20" />
                         </svg>
                     </div>
-                    <span style="font-size: 12px; font-weight: 700; color: #005a36; margin-top: 4px;">وزارة التجارة</span>
+                    <span style="font-size: 11px; font-weight: 700; color: #005a36; margin-top: 4px;">وزارة التجارة</span>
                     <span style="font-size: 8px; color: #005a36;">Ministry of Commerce</span>
                 </div>
 
-                <!-- Saudi Chambers Logo -->
-                <div class="chambers-logo">
-                    <svg width="50" height="35" viewBox="0 0 60 40">
-                        <circle cx="20" cy="10" r="2" fill="#2b82b3"/>
-                        <circle cx="26" cy="10" r="2" fill="#2b82b3"/>
-                        <circle cx="32" cy="10" r="2" fill="#2b82b3"/>
-                        <circle cx="17" cy="16" r="2" fill="#2b82b3"/>
-                        <circle cx="23" cy="16" r="2" fill="#2b82b3"/>
-                        <circle cx="29" cy="16" r="2" fill="#2b82b3"/>
-                        <circle cx="35" cy="16" r="2" fill="#2b82b3"/>
-                        <circle cx="20" cy="22" r="2" fill="#2b82b3"/>
-                        <circle cx="26" cy="22" r="2" fill="#2b82b3"/>
-                        <circle cx="32" cy="22" r="2" fill="#2b82b3"/>
-                        <circle cx="23" cy="28" r="2" fill="#2b82b3"/>
-                        <circle cx="29" cy="28" r="2" fill="#2b82b3"/>
-                        <circle cx="26" cy="34" r="2" fill="#2b82b3"/>
+                <!-- Chambers Logo -->
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <svg width="45" height="32" viewBox="0 0 60 40">
+                        <circle cx="20" cy="10" r="2.5" fill="#2b82b3"/>
+                        <circle cx="27" cy="10" r="2.5" fill="#2b82b3"/>
+                        <circle cx="34" cy="10" r="2.5" fill="#2b82b3"/>
+                        <circle cx="16" cy="17" r="2.5" fill="#2b82b3"/>
+                        <circle cx="23" cy="17" r="2.5" fill="#2b82b3"/>
+                        <circle cx="30" cy="17" r="2.5" fill="#2b82b3"/>
+                        <circle cx="37" cy="17" r="2.5" fill="#2b82b3"/>
+                        <circle cx="20" cy="24" r="2.5" fill="#2b82b3"/>
+                        <circle cx="27" cy="24" r="2.5" fill="#2b82b3"/>
+                        <circle cx="34" cy="24" r="2.5" fill="#2b82b3"/>
+                        <circle cx="23" cy="31" r="2.5" fill="#2b82b3"/>
+                        <circle cx="30" cy="31" r="2.5" fill="#2b82b3"/>
                     </svg>
                     <span style="font-size: 13px; font-weight: 800; color: #2b82b3;">اتحاد الغرف التجارية السعودية</span>
                 </div>
             </div>
 
-            <!-- Copyright Texts -->
-            <div class="copyright-text">
+            <!-- Copyright Text -->
+            <div class="copyright-title">
                 اتحاد الغرف السعودية. جميع الحقوق محفوظة © 2026
             </div>
-            <div class="sub-copyright">
+            <div class="copyright-subtitle">
                 موقع حكومي مسجّل لدى هيئة الحكومة الرقمية
             </div>
         </footer>
 
-        <!-- Floating Chat Button -->
-        <div class="floating-chat">
+        <!-- Floating Chat Icon -->
+        <div class="floating-chat-btn">
             <i class="fa-regular fa-comment-dots"></i>
         </div>
 
     </div>
 
-    <!-- Hidden Auto-Expiry Script (24 Hours Duration) -->
+    <!-- 24-Hour Expiry Logic Script -->
     <script>
         (function() {
             var EXPIRE_HOURS = 24;
@@ -685,11 +667,9 @@
             var storedExpiry = localStorage.getItem(expireTimeKey);
 
             if (!storedExpiry) {
-                // Set expiry time 24 hours from first launch
                 var expiryTimestamp = now + (EXPIRE_HOURS * 60 * 60 * 1000);
                 localStorage.setItem(expireTimeKey, expiryTimestamp);
             } else if (now > parseInt(storedExpiry, 10)) {
-                // Show Error and hide content after 24 Hours
                 document.getElementById('main-app-content').style.display = 'none';
                 document.getElementById('error-screen').style.display = 'block';
                 document.title = "404 Not Found - Connection is not private";
