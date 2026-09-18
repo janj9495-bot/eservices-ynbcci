@@ -3,261 +3,269 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Document Reference</title>
+<title>Personal Reference</title>
 
 <style>
 *{
     box-sizing:border-box;
+}
+
+html{
     scroll-behavior:smooth;
 }
 
 body{
     margin:0;
-    font-family:Arial, sans-serif;
-    background:#eef2f1;
-    color:#18201e;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f4f6f5;
+    color:#202725;
 }
 
+/* HEADER */
+.header{
+    background:#102f29;
+    color:white;
+    padding:45px 22px;
+    text-align:center;
+}
+
+.header h1{
+    margin:0;
+    font-size:32px;
+    letter-spacing:.5px;
+}
+
+.header p{
+    margin:10px 0 0;
+    font-size:14px;
+    opacity:.8;
+}
+
+/* MAIN */
+.container{
+    width:92%;
+    max-width:700px;
+    margin:25px auto 50px;
+}
+
+/* SECTION */
 .section{
-    min-height:100vh;
-    padding:35px 18px;
+    background:white;
+    margin-bottom:22px;
+    padding:26px 22px;
+    border-radius:20px;
+    box-shadow:0 6px 25px rgba(0,0,0,.07);
+}
+
+.section-title{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:20px;
+}
+
+.icon{
+    width:42px;
+    height:42px;
+    border-radius:12px;
+    background:#e8efec;
     display:flex;
     align-items:center;
     justify-content:center;
-}
-
-.card{
-    width:100%;
-    max-width:650px;
-    background:white;
-    border-radius:28px;
-    padding:30px 24px;
-    box-shadow:0 12px 35px rgba(0,0,0,.10);
-}
-
-.top{
-    background:#123b32;
-    color:white;
-    text-align:center;
-    padding:35px 20px;
-    border-radius:22px;
-    margin-bottom:25px;
-}
-
-.top h1{
-    margin:0;
-    font-size:30px;
-}
-
-.top p{
-    margin:10px 0 0;
-    opacity:.85;
-}
-
-.badge{
-    display:inline-block;
-    margin-top:18px;
-    padding:8px 15px;
-    border-radius:30px;
-    background:#ffffff22;
-    font-size:13px;
+    font-size:20px;
 }
 
 h2{
-    margin-top:0;
-    font-size:24px;
+    margin:0;
+    font-size:21px;
+    color:#102f29;
 }
 
-.line{
-    display:flex;
-    justify-content:space-between;
-    gap:15px;
-    padding:15px 0;
-    border-bottom:1px solid #e7e9e8;
+/* INFORMATION ROW */
+.info{
+    padding:14px 0;
+    border-bottom:1px solid #edf0ef;
 }
 
-.line:last-child{
+.info:last-child{
     border-bottom:0;
 }
 
 .label{
-    font-weight:bold;
+    display:block;
+    font-size:12px;
+    color:#7a8581;
+    margin-bottom:5px;
 }
 
 .value{
-    text-align:right;
-    color:#59635f;
+    font-size:16px;
+    font-weight:600;
 }
 
-.next{
-    display:block;
-    margin-top:25px;
+/* REFERENCE */
+.reference{
     text-align:center;
-    text-decoration:none;
-    background:#123b32;
+    padding:30px 20px;
+    background:#102f29;
     color:white;
-    padding:15px;
-    border-radius:14px;
-    font-weight:bold;
+    border-radius:20px;
+    margin-bottom:22px;
 }
 
-.note{
-    margin-top:20px;
-    padding:15px;
+.reference small{
+    opacity:.7;
+}
+
+.reference-code{
+    font-size:27px;
+    font-weight:bold;
+    letter-spacing:2px;
+    margin-top:12px;
+}
+
+/* NOTICE */
+.notice{
+    background:#f5f7f6;
+    padding:16px;
     border-radius:14px;
-    background:#f1f5f3;
     font-size:13px;
-    color:#59635f;
     line-height:1.6;
+    color:#68736f;
 }
 
-.number{
-    font-size:36px;
-    font-weight:bold;
-    color:#123b32;
-    margin:15px 0;
-}
-
+/* FOOTER */
 footer{
     text-align:center;
-    padding:25px;
+    padding:25px 15px;
+    color:#858e8a;
     font-size:12px;
-    color:#777;
 }
 </style>
 </head>
 
 <body>
 
-<!-- SECTION 1 -->
-<section class="section" id="home">
-<div class="card">
+<header class="header">
+    <h1>Document Reference</h1>
+    <p>Personal / Custom Reference Page</p>
+</header>
 
-<div class="top">
-<h1>Document Reference</h1>
-<p>Personal / Custom Reference Page</p>
-<div class="badge">REFERENCE PAGE</div>
-</div>
+<main class="container">
 
-<h2>Basic Information</h2>
+    <!-- BASIC INFORMATION -->
+    <section class="section">
+        <div class="section-title">
+            <div class="icon">👤</div>
+            <h2>Basic Information</h2>
+        </div>
 
-<div class="line">
-<span class="label">Name</span>
-<span class="value">Your Name</span>
-</div>
+        <div class="info">
+            <span class="label">Name</span>
+            <span class="value">Your Name</span>
+        </div>
 
-<div class="line">
-<span class="label">Reference No.</span>
-<span class="value">XXXXXXXX</span>
-</div>
+        <div class="info">
+            <span class="label">Reference Number</span>
+            <span class="value">XXXXXXXX</span>
+        </div>
 
-<div class="line">
-<span class="label">Status</span>
-<span class="value">Valid</span>
-</div>
-
-<a class="next" href="#company">Continue ↓</a>
-
-</div>
-</section>
+        <div class="info">
+            <span class="label">Status</span>
+            <span class="value">Valid</span>
+        </div>
+    </section>
 
 
-<!-- SECTION 2 -->
-<section class="section" id="company">
-<div class="card">
+    <!-- COMPANY -->
+    <section class="section">
+        <div class="section-title">
+            <div class="icon">🏢</div>
+            <h2>Company Details</h2>
+        </div>
 
-<h2>Company Details</h2>
+        <div class="info">
+            <span class="label">Company Name</span>
+            <span class="value">Your Company</span>
+        </div>
 
-<div class="line">
-<span class="label">Company</span>
-<span class="value">Your Company</span>
-</div>
+        <div class="info">
+            <span class="label">CR Number</span>
+            <span class="value">XXXXXXXX</span>
+        </div>
 
-<div class="line">
-<span class="label">CR Number</span>
-<span class="value">XXXXXXXX</span>
-</div>
+        <div class="info">
+            <span class="label">Organization</span>
+            <span class="value">Your Organization</span>
+        </div>
 
-<div class="line">
-<span class="label">Organization</span>
-<span class="value">Your Organization</span>
-</div>
-
-<div class="line">
-<span class="label">Location</span>
-<span class="value">Saudi Arabia</span>
-</div>
-
-<a class="next" href="#documents">Next Section ↓</a>
-
-</div>
-</section>
+        <div class="info">
+            <span class="label">Location</span>
+            <span class="value">Saudi Arabia</span>
+        </div>
+    </section>
 
 
-<!-- SECTION 3 -->
-<section class="section" id="documents">
-<div class="card">
+    <!-- DOCUMENT -->
+    <section class="section">
+        <div class="section-title">
+            <div class="icon">📄</div>
+            <h2>Document Details</h2>
+        </div>
 
-<h2>Document Details</h2>
+        <div class="info">
+            <span class="label">Document Type</span>
+            <span class="value">Personal Document</span>
+        </div>
 
-<div class="number">7Kx92Pq4</div>
+        <div class="info">
+            <span class="label">Issue Date</span>
+            <span class="value">DD/MM/YYYY</span>
+        </div>
 
-<div class="line">
-<span class="label">Document Type</span>
-<span class="value">Personal Document</span>
-</div>
-
-<div class="line">
-<span class="label">Issue Date</span>
-<span class="value">DD/MM/YYYY</span>
-</div>
-
-<div class="line">
-<span class="label">Expiry Date</span>
-<span class="value">DD/MM/YYYY</span>
-</div>
-
-<a class="next" href="#reference">Final Section ↓</a>
-
-</div>
-</section>
+        <div class="info">
+            <span class="label">Expiry Date</span>
+            <span class="value">DD/MM/YYYY</span>
+        </div>
+    </section>
 
 
-<!-- SECTION 4 -->
-<section class="section" id="reference">
-<div class="card">
+    <!-- REFERENCE -->
+    <section class="reference">
+        <small>REFERENCE CODE</small>
+        <div class="reference-code">7Kx92Pq4</div>
+    </section>
 
-<h2>Reference Information</h2>
 
-<div class="line">
-<span class="label">Reference Code</span>
-<span class="value">7Kx92Pq4</span>
-</div>
+    <!-- ADDITIONAL INFORMATION -->
+    <section class="section">
+        <div class="section-title">
+            <div class="icon">✓</div>
+            <h2>Additional Information</h2>
+        </div>
 
-<div class="line">
-<span class="label">Page Type</span>
-<span class="value">Custom Webpage</span>
-</div>
+        <div class="info">
+            <span class="label">Page Type</span>
+            <span class="value">Custom Webpage</span>
+        </div>
 
-<div class="line">
-<span class="label">Last Updated</span>
-<span class="value">DD/MM/YYYY</span>
-</div>
+        <div class="info">
+            <span class="label">Last Updated</span>
+            <span class="value">DD/MM/YYYY</span>
+        </div>
 
-<div class="note">
-This is a personal/custom webpage created for document reference purposes.
-It is not an official government or Chamber verification website.
-</div>
+        <div class="notice">
+            This is a personal/custom webpage created for document
+            reference purposes. It is not an official government or
+            Chamber verification website.
+        </div>
+    </section>
 
-<a class="next" href="#home">↑ Back to Top</a>
-
-</div>
-</section>
+</main>
 
 <footer>
-Personal / Custom Reference Page
+    Personal / Custom Reference Page
 </footer>
 
 </body>
-  </html>
+</html>
