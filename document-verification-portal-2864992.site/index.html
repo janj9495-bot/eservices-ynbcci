@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نتيجة التحقق من الوثائق - منصة تجار</title>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        html, body {
+            width: 100%;
+            min-height: 100vh;
+            background-color: #f4f6f8;
+            color: #333333;
+            direction: rtl;
+            overflow-y: auto;
+        }
+
+        /* Top Green Header Styling */
+        .top-app-bar {
+            background-color: #006838;
+            color: #ffffff;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .url-bar {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            direction: ltr;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #ffffff;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        /* Sub Navigation Header */
+        .sub-header {
+            background-color: #ffffff;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 14px 24px;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-box {
+            background-color: #006838;
+            color: #ffffff;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #555555;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .header-actions a {
+            text-decoration: none;
+            color: #006838;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* Scrollable Main Content Container */
+        .page-content {
+            max-width: 850px;
+            width: 100%;
+            margin: 25px auto;
+            padding: 0 15px;
+        }
+
+        /* General Card Layout */
+        .card {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 20px;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .back-btn {
+            color: #666666;
+            font-size: 16px;
+            text-decoration: none;
+            margin-top: 2px;
+        }
+
+        .card-header h2 {
+            font-size: 17px;
+            color: #222222;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            color: #777777;
+            font-size: 12px;
+            margin-top: 5px;
+            line-height: 1.6;
+        }
+
+        /* Grid Data List */
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px 24px;
+            margin-bottom: 25px;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .detail-item .icon-box {
+            width: 32px;
+            height: 32px;
+            background-color: #f0fdf4;
+            color: #006838;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .detail-item .label {
+            display: block;
+            font-size: 12px;
+            color: #777777;
+            margin-bottom: 2px;
+        }
+
+        .detail-item .value {
+            font-size: 13px;
+            font-weight: 700;
+            color: #222222;
+        }
+
+        .status-badge {
+            color: #006838;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .status-badge .dot {
+            width: 8px;
+            height: 8px;
+            background-color: #006838;
+            border-radius: 50%;
+        }
+
+        /* Action Buttons */
+        .card-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: #006838;
+            color: #ffffff;
+            flex: 1;
+        }
+
+        .btn-secondary {
+            background-color: #f3f4f6;
+            color: #4b5563;
+            flex: 1;
+        }
+
+        /* Vertical Steps Progress Timeline */
+        .timeline-container {
+            padding-right: 10px;
+        }
+
+        .timeline-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            position: relative;
+        }
+
+        .step-circle {
+            width: 24px;
+            height: 24px;
+            background-color: #006838;
+            color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            z-index: 2;
+        }
+
+        .step-details h4 {
+            font-size: 13px;
+            color: #222222;
+            font-weight: 700;
+        }
+
+        .step-details p {
+            font-size: 12px;
+            color: #777777;
+            margin-top: 3px;
+        }
+
+        .timeline-line {
+            width: 2px;
+            height: 35px;
+            background-color: #006838;
+            margin: 4px 11px;
+        }
+
+        /* Detailed Footer Section */
+        .main-footer {
+            background-color: #ffffff;
+            border-top: 1px solid #e0e0e0;
+            padding: 35px 20px 20px;
+            margin-top: 40px;
+        }
+
+        .footer-grid {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .footer-section h3 {
+            font-size: 15px;
+            margin-bottom: 14px;
+            color: #222222;
+            font-weight: 700;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section a {
+            text-decoration: none;
+            color: #666666;
+            font-size: 13px;
+            transition: color 0.2s;
+        }
+
+        .footer-section a:hover {
+            color: #006838;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 1px solid #f0f0f0;
+            color: #888888;
+            font-size: 12px;
+        }
+
+        /* WhatsApp Floating Icon */
+        .floating-chat {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: #25d366;
+            color: #ffffff;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        /* Mobile View Response */
+        @media (max-width: 768px) {
+            .details-grid, .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top App Green Bar -->
+    <div class="top-app-bar">
+        <div style="font-weight: bold; font-size: 16px;">منصة تجار</div>
+        <div class="url-bar">
+            <i class="fa-solid fa-lock" style="font-size: 11px;"></i>
+            <span>tujar.fsc.org.sa/document</span>
+        </div>
+        <i class="fa-solid fa-ellipsis-vertical"></i>
+    </div>
+
+    <!-- Secondary Navigation Header -->
+    <header class="sub-header">
+        <div class="header-container">
+            <div class="logo-area">
+                <div class="logo-box">تجار</div>
+            </div>
+            <nav class="nav-links">
+                <a href="#">منصة تجار</a>
+                <a href="#">الخدمات</a>
+                <a href="#">لمن المنصة</a>
+                <a href="#">كيف تبدأ</a>
+                <a href="#">عن المنصة</a>
+            </nav>
+            <div class="header-actions">
+                <a href="#"><i class="fa-solid fa-globe"></i> English</a>
+                <a href="#"><i class="fa-regular fa-user"></i> تسجيل الدخول</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Wrapper (Scrolls Vertically) -->
+    <main class="page-content">
+        
+        <!-- Document Result Card -->
+        <section class="card">
+            <div class="card-header">
+                <a href="#" class="back-btn"><i class="fa-solid fa-arrow-right"></i></a>
+                <div>
+                    <h2>نتيجة التحقق من الوثائق</h2>
+                    <p class="subtitle">خدمة تتيح التحقق من الوثائق التي تم تصديقها إلكترونياً عبر بوابة خدمات المشتركين، وللتحقق من شهادة الاشتراك الرجاء إدخال الرقم المرجعي الخاص بالوثيقة.</p>
+                </div>
+            </div>
+
+            <!-- Detailed Grid Items -->
+            <div class="details-grid">
+                <div class="detail-item">
+                    <div class="icon-box"><i class="fa-regular fa-building"></i></div>
+                    <div>
+                        <span class="label">اسم الغرفة</span>
+                        <span class="value">عنيزة</span>
+                    </div>
+                </div>
+
+                <div class="detail-item">
+                    <div class="icon-box"><i class="fa-regular fa-file-lines"></i></div>
+                    <div>
+                        <span class="label">الخدمة</span>
+                        <span class="value">تصديق المطبوعات الرسمية</span>
+                    </div>
+                </div>
+
+                <div class="detail-item">
+                    <div class="icon-box"><i class="fa-solid fa-hashtag"></i></div>
+                    <div>
+                        <span class="label">رقم الوثيقة</span>
+                        <span class="value">602-25728</span>
+                    </div>
+                </div>
+
+                <div class="detail-item">
+                    <div class="icon-box"><i class="fa-regular fa-user"></i></div>
+                    <div>
+                        <span class="label">مقدم الطلب</span>
+                        <span class="value">سالم فواز الشمري</span>
+                    </div>
+                </div>
+
+                <div class="detail-item">
+                    <div class="icon-box"><i class="fa-solid fa-store"></i></div>
+                    <div>
+                        <span class="label">اسم المنشأة</span>
+                        <span class="value">شركة سالم فواز الشمري لصيانة السيارات</span>
+                    </div>
+                </div>
+
+                <div class="detail-item">
+                    <div class="icon-box"><i class="fa-solid fa-id-card"></i></div>
+                    <div>
+                        <span class="label">رقم العضوية</span>
+                        <span class="value">602001213945</span>
+                    </div>
+                </div>
+
+                <div class="detail-item">
+                    <div class="icon-box"><i class="fa-solid fa-barcode"></i></div>
+                    <div>
+                        <span class="label">الرقم الموحد</span>
+                        <span class="value">7049514032</span>
+                    </div>
+                </div>
+
+                <div class="detail-item">
+                    <div class="icon-box"><i class="fa-regular fa-calendar-days"></i></div>
+                    <div>
+                        <span class="label">تاريخ ووقت الإنشاء</span>
+                        <span class="value">2026/09/10 - 07:15 PM</span>
+                    </div>
+                </div>
+
+                <div class="detail-item">
+                    <div class="icon-box"><i class="fa-solid fa-check-double"></i></div>
+                    <div>
+                        <span class="label">حالة الوثيقة</span>
+                        <span class="value status-badge"><span class="dot"></span> مقبول - ساري</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="card-actions">
+                <button class="btn btn-primary">تحميل الوثيقة</button>
+                <button class="btn btn-secondary">إعادة تحقق</button>
+            </div>
+        </section>
+
+        <!-- Timeline Steps Card -->
+        <section class="card timeline-container">
+            <div class="timeline-step">
+                <div class="step-circle"><i class="fa-solid fa-check"></i></div>
+                <div class="step-details">
+                    <h4>الاستعلام بالرقم المرجعي</h4>
+                    <p>البحث عن وثيقة قائمة العمليات</p>
+                </div>
+            </div>
+
+            <div class="timeline-line"></div>
+
+            <div class="timeline-step">
+                <div class="step-circle"><i class="fa-solid fa-check"></i></div>
+                <div class="step-details">
+                    <h4>التحقق من صحة المعرف</h4>
+                    <p>أدخل بيانات العضوية أو الجهة التابعة لك</p>
+                </div>
+            </div>
+
+            <div class="timeline-line"></div>
+
+            <div class="timeline-step">
+                <div class="step-circle"><i class="fa-solid fa-check"></i></div>
+                <div class="step-details">
+                    <h4>التحقق عبر عرض بيانات الوثيقة وتحميلها</h4>
+                    <p>التحقق عبر عرض بيانات الوثيقة وتحميلها</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Comprehensive Footer Section -->
+    <footer class="main-footer">
+        <div class="footer-grid">
+            <div class="footer-section">
+                <h3>أقسام مهمة</h3>
+                <ul>
+                    <li><a href="#">الأسئلة الشائعة</a></li>
+                    <li><a href="#">سياسة الخصوصية</a></li>
+                    <li><a href="#">الشروط والأحكام</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>روابط أخرى</h3>
+                <ul>
+                    <li><a href="mailto:HD@elm.sa">HD@elm.sa</a></li>
+                    <li><a href="#">الدعم الفني والمساندة</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>روابط خارجية</h3>
+                <ul>
+                    <li><a href="#">وزارة التجارة</a></li>
+                    <li><a href="#">وزارة الصناعة والثروة المعدنية</a></li>
+                    <li><a href="#">هيئة الزكاة والضريبة والجمارك</a></li>
+                    <li><a href="#">الموارد البشرية والتنمية الاجتماعية</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>اتحاد الغرف التجارية السعودية | وزارة التجارة © 2026</p>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Action Button -->
+    <div class="floating-chat">
+        <i class="fa-brands fa-whatsapp"></i>
+    </div>
+
+</body>
+</html>
