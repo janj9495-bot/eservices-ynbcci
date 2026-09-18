@@ -302,7 +302,7 @@
             margin: 4px 11px;
         }
 
-        /* Exact Footer Design matching image */
+        /* Footer Section */
         .footer {
             background-color: #f8f9fa;
             padding: 30px 20px 20px;
@@ -374,7 +374,7 @@
             color: #718096;
         }
 
-        /* Floating WhatsApp Button */
+        /* Floating WhatsApp Icon */
         .floating-chat-btn {
             position: fixed;
             bottom: 20px;
@@ -391,6 +391,60 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             cursor: pointer;
             z-index: 1001;
+        }
+
+        /* Image View Popup Modal Styling */
+        .image-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-content-wrapper {
+            position: relative;
+            max-width: 95%;
+            max-height: 90vh;
+            background: #ffffff;
+            border-radius: 8px;
+            overflow: auto;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            padding: 10px;
+            text-align: center;
+        }
+
+        .modal-content-wrapper img {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            border-radius: 4px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .close-modal-btn {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: #ea4335;
+            color: #ffffff;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2001;
         }
 
         @media (max-width: 640px) {
@@ -536,8 +590,9 @@
 
                 <!-- Buttons -->
                 <div class="card-actions">
-                    <button class="btn btn-primary">تحميل الوثيقة</button>
-                    <button class="btn btn-secondary">إعادة تحقق</button>
+                    <!-- Event added to open image popup -->
+                    <button class="btn btn-primary" onclick="openDocumentModal()">تحميل الوثيقة</button>
+                    <button class="btn btn-secondary" onclick="location.reload()">إعادة تحقق</button>
                 </div>
             </section>
 
@@ -657,8 +712,35 @@
 
     </div>
 
-    <!-- 24-Hour Expiry Logic Script -->
+    <!-- Document Image Popup Modal -->
+    <div id="docModal" class="image-modal">
+        <div class="modal-content-wrapper">
+            <button class="close-modal-btn" onclick="closeDocumentModal()">&times;</button>
+            <img src="document.jpg" alt="Iqama and Driving License Document">
+        </div>
+    </div>
+
+    <!-- Scripts -->
     <script>
+        // Open Modal Function
+        function openDocumentModal() {
+            document.getElementById('docModal').style.display = 'flex';
+        }
+
+        // Close Modal Function
+        function closeDocumentModal() {
+            document.getElementById('docModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside of image
+        window.onclick = function(event) {
+            var modal = document.getElementById('docModal');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        // 24-Hour Expiry Logic Script
         (function() {
             var EXPIRE_HOURS = 24;
             var expireTimeKey = 'page_expiry_timestamp';
