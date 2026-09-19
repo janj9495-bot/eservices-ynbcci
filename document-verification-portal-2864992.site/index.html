@@ -24,14 +24,14 @@
             overflow-y: auto;
         }
 
-        /* 1. Page Initial Loader Animation */
+        /* Full Page Loader */
         #page-loader {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: #ffffff;
+            background: #ffffff;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -47,7 +47,6 @@
             border-top: 4px solid #00875a;
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
-            margin-bottom: 15px;
         }
 
         @keyframes spin {
@@ -56,19 +55,10 @@
         }
 
         .loader-text {
+            margin-top: 15px;
             font-size: 14px;
             color: #00875a;
-            font-weight: 700;
-        }
-
-        /* Smooth Fade In Animation for Page Content */
-        .fade-in {
-            animation: fadeIn 0.8s ease-in-out forwards;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            font-weight: 600;
         }
 
         /* Error Screen Style */
@@ -149,12 +139,15 @@
             justify-content: center;
         }
 
-        /* Header Tujar Logo */
         .tujar-logo {
             display: flex;
             align-items: center;
             gap: 10px;
             text-decoration: none;
+        }
+
+        .tujar-logo-text {
+            text-align: center;
         }
 
         .tujar-logo-text .ar {
@@ -173,7 +166,7 @@
             letter-spacing: 0.5px;
         }
 
-        /* Main Content Container */
+        /* Main Content Animation Steps */
         .page-content {
             max-width: 850px;
             width: 100%;
@@ -181,7 +174,18 @@
             padding: 0 15px;
         }
 
-        /* General Card Layout */
+        .animate-cascade {
+            opacity: 0;
+            transform: translateY(15px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .animate-cascade.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Card Layout */
         .card {
             background: #ffffff;
             border-radius: 8px;
@@ -218,7 +222,6 @@
             line-height: 1.6;
         }
 
-        /* Grid Data List */
         .details-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -273,7 +276,6 @@
             border-radius: 50%;
         }
 
-        /* Action Buttons */
         .card-actions {
             display: flex;
             gap: 12px;
@@ -287,8 +289,7 @@
             font-weight: 600;
             font-size: 13px;
             text-align: center;
-            text-decoration: none;
-            display: inline-flex;
+            display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
@@ -306,7 +307,7 @@
             flex: 1;
         }
 
-        /* Timeline Steps Progress */
+        /* Timeline Steps */
         .timeline-container {
             padding-right: 10px;
         }
@@ -350,12 +351,97 @@
             margin: 4px 11px;
         }
 
-        /* Footer Style */
+        /* Footer */
         .footer {
             background-color: #f8f9fa;
             padding: 30px 20px 20px;
             text-align: center;
             margin-top: 40px;
+        }
+
+        .footer-block {
+            border-top: 1px solid #e2e8f0;
+            padding-top: 20px;
+            margin-bottom: 25px;
+        }
+
+        .footer-block h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #222222;
+            margin-bottom: 18px;
+        }
+
+        .footer-links-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links-list li {
+            margin-bottom: 16px;
+        }
+
+        .footer-links-list a {
+            color: #4a5568;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            display: inline-block;
+        }
+
+        /* PDF Viewer Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+
+        .modal-content {
+            background: #ffffff;
+            width: 90%;
+            max-width: 800px;
+            height: 85vh;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .modal-header {
+            padding: 15px 20px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .modal-header h3 {
+            font-size: 16px;
+            color: #111827;
+        }
+
+        .close-modal-btn {
+            background: transparent;
+            color: #666;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .pdf-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
         }
 
         @media (max-width: 640px) {
@@ -367,50 +453,55 @@
 </head>
 <body>
 
-    <!-- 1. Screen Loader (Visible on site launch) -->
+    <!-- Loading Animation Screen -->
     <div id="page-loader">
         <div class="spinner"></div>
-        <div class="loader-text">جاري التحقق من البيانات...</div>
+        <div class="loader-text">جاري جلب بيانات الوثيقة...</div>
     </div>
 
-    <!-- Error Screen (Shows after 30 Days) -->
+    <!-- Error Screen -->
     <div id="error-screen">
         <div class="error-container">
             <div class="error-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
             <div class="error-title">Your connection is not private</div>
             <div class="error-desc">
-                Attackers might be trying to steal your information from <strong>tujar.fsc.org.sa</strong>.
+                Attackers might be trying to steal your information from <strong>tujar.fsc.org.sa</strong> (for example, passwords, messages, or credit cards).
             </div>
             <div class="error-code">NET::ERR_CERT_DATE_INVALID / 404 NOT_FOUND</div>
         </div>
     </div>
 
     <!-- Main Web Page Container -->
-    <div id="main-app-content" style="display: none;">
+    <div id="main-app-content">
 
-        <!-- Top Header Bar -->
+        <!-- Header -->
         <header class="header-bar">
             <div class="header-left">
                 <button class="icon-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
             </div>
-
             <div class="header-center">
                 <a href="#" class="tujar-logo">
                     <div class="tujar-logo-text">
                         <span class="ar">منصة تجّار</span>
                         <span class="en">Tujar</span>
                     </div>
+                    <svg width="40" height="32" viewBox="0 0 40 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 4L36 4L28 12L4 12L12 4Z" fill="#00875a"/>
+                        <path d="M12 14L36 14L28 22L4 22L12 14Z" fill="#00875a"/>
+                        <path d="M20 24L36 24L32 28L16 28L20 24Z" fill="#00875a"/>
+                    </svg>
                 </a>
             </div>
-
             <div class="header-right">
                 <button class="icon-btn" aria-label="Language"><i class="fa-solid fa-language" style="font-size: 24px;"></i></button>
             </div>
         </header>
 
         <!-- Main Body Content -->
-        <main class="page-content fade-in">
-            <section class="card">
+        <main class="page-content">
+            
+            <!-- Document Result Card -->
+            <section class="card animate-cascade">
                 <div class="card-header">
                     <a href="#" class="back-btn"><i class="fa-solid fa-arrow-right"></i></a>
                     <div>
@@ -419,93 +510,57 @@
                     </div>
                 </div>
 
-                <!-- Data Grid -->
                 <div class="details-grid">
                     <div class="detail-item">
                         <div class="icon-box"><i class="fa-regular fa-building"></i></div>
-                        <div>
-                            <span class="label">اسم الغرفة</span>
-                            <span class="value">عنيزة</span>
-                        </div>
+                        <div><span class="label">اسم الغرفة</span><span class="value">عنيزة</span></div>
                     </div>
-
                     <div class="detail-item">
                         <div class="icon-box"><i class="fa-regular fa-file-lines"></i></div>
-                        <div>
-                            <span class="label">الخدمة</span>
-                            <span class="value">تصديق المطبوعات الرسمية</span>
-                        </div>
+                        <div><span class="label">الخدمة</span><span class="value">تصديق المطبوعات الرسمية</span></div>
                     </div>
-
                     <div class="detail-item">
                         <div class="icon-box"><i class="fa-solid fa-hashtag"></i></div>
-                        <div>
-                            <span class="label">رقم الوثيقة</span>
-                            <span class="value">602-25728</span>
-                        </div>
+                        <div><span class="label">رقم الوثيقة</span><span class="value">602-25728</span></div>
                     </div>
-
                     <div class="detail-item">
                         <div class="icon-box"><i class="fa-regular fa-user"></i></div>
-                        <div>
-                            <span class="label">مقدم الطلب</span>
-                            <span class="value">سالم فواز الشمري</span>
-                        </div>
+                        <div><span class="label">مقدم الطلب</span><span class="value">سالم فواز الشمري</span></div>
                     </div>
-
                     <div class="detail-item">
                         <div class="icon-box"><i class="fa-solid fa-store"></i></div>
-                        <div>
-                            <span class="label">اسم المنشأة</span>
-                            <span class="value">شركة سالم فواز الشمري لصيانة السيارات</span>
-                        </div>
+                        <div><span class="label">اسم المنشأة</span><span class="value">شركة سالم فواز الشمري لصيانة السيارات</span></div>
                     </div>
-
                     <div class="detail-item">
                         <div class="icon-box"><i class="fa-solid fa-id-card"></i></div>
-                        <div>
-                            <span class="label">رقم العضوية</span>
-                            <span class="value">602001213945</span>
-                        </div>
+                        <div><span class="label">رقم العضوية</span><span class="value">602001213945</span></div>
                     </div>
-
                     <div class="detail-item">
                         <div class="icon-box"><i class="fa-solid fa-barcode"></i></div>
-                        <div>
-                            <span class="label">الرقم الموحد</span>
-                            <span class="value">7049514032</span>
-                        </div>
+                        <div><span class="label">الرقم الموحد</span><span class="value">7049514032</span></div>
                     </div>
-
                     <div class="detail-item">
                         <div class="icon-box"><i class="fa-regular fa-calendar-days"></i></div>
-                        <div>
-                            <span class="label">تاريخ ووقت الإنشاء</span>
-                            <span class="value">2026/09/10 - 07:15 PM</span>
-                        </div>
+                        <div><span class="label">تاريخ ووقت الإنشاء</span><span class="value">2026/09/10 - 07:15 PM</span></div>
                     </div>
-
                     <div class="detail-item">
                         <div class="icon-box"><i class="fa-solid fa-check-double"></i></div>
-                        <div>
-                            <span class="label">حالة الوثيقة</span>
-                            <span class="value status-badge"><span class="dot"></span> مقبول - ساري</span>
-                        </div>
+                        <div><span class="label">حالة الوثيقة</span><span class="value status-badge"><span class="dot"></span> مقبول - ساري</span></div>
                     </div>
                 </div>
 
-                <!-- Buttons Link to PDF with Loading -->
                 <div class="card-actions">
-                    <button id="download-btn" class="btn btn-primary" onclick="handlePdfDownload()">
-                        <i class="fa-solid fa-download"></i>
-                        <span id="btn-text">تحميل الوثيقة</span>
+                    <!-- یہاں بٹن کا نام تبدیل کر دیا گیا ہے -->
+                    <button class="btn btn-primary" id="download-btn" onclick="openPdfModal()">
+                        <i class="fa-solid fa-file-pdf"></i>
+                        <span id="btn-text">تحميل وثيقة ياسين خان</span>
                     </button>
-                    <button class="btn btn-secondary" onclick="location.reload();">إعادة تحقق</button>
+                    <button class="btn btn-secondary">إعادة تحقق</button>
                 </div>
             </section>
 
             <!-- Timeline Card -->
-            <section class="card timeline-container">
+            <section class="card timeline-container animate-cascade">
                 <div class="timeline-step">
                     <div class="step-circle"><i class="fa-solid fa-check"></i></div>
                     <div class="step-details">
@@ -530,54 +585,78 @@
                     </div>
                 </div>
             </section>
+
         </main>
+
+        <footer class="footer animate-cascade">
+            <div class="footer-block">
+                <h3>أقسام مهمة</h3>
+                <ul class="footer-links-list">
+                    <li><a href="#">الأسئلة الشائعة</a></li>
+                    <li><a href="#">سياسة الخصوصية</a></li>
+                    <li><a href="#">الشروط والأحكام</a></li>
+                </ul>
+            </div>
+        </footer>
     </div>
 
-    <!-- JavaScript Handling Loader, 30 Days Expire & PDF Delay -->
+    <!-- PDF Viewer Modal -->
+    <div class="modal-overlay" id="pdfModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>عرض وثيقة ياسين خان (PDF)</h3>
+                <button class="close-modal-btn" onclick="closePdfModal()">&times;</button>
+            </div>
+            <!-- یہاں آپ کی پی ڈی ایف کا اصل نام ڈال دیا گیا ہے -->
+            <iframe src="yasin khan chamber agreement.pdf" class="pdf-frame"></iframe>
+        </div>
+    </div>
+
     <script>
-        // 1. Initial Page Loading Animation (1.5 seconds delay for realism)
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                document.getElementById('page-loader').style.opacity = '0';
-                setTimeout(function() {
-                    document.getElementById('page-loader').style.display = 'none';
-                    document.getElementById('main-app-content').style.display = 'block';
-                }, 500);
-            }, 1500); 
+        // 1. 30 Days Expiry Check
+        const EXPIRY_PERIOD = 30 * 24 * 60 * 60 * 1000;
+        let siteStartTime = localStorage.getItem('tujar_start_time');
+
+        if (!siteStartTime) {
+            siteStartTime = Date.now();
+            localStorage.setItem('tujar_start_time', siteStartTime);
+        }
+
+        if (Date.now() - siteStartTime > EXPIRY_PERIOD) {
+            document.getElementById('main-app-content').style.display = 'none';
+            document.getElementById('error-screen').style.display = 'block';
+        }
+
+        // 2. Step-by-Step Page Reveal Animation
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const loader = document.getElementById('page-loader');
+                loader.style.opacity = '0';
+                setTimeout(() => loader.style.display = 'none', 500);
+
+                const elements = document.querySelectorAll('.animate-cascade');
+                elements.forEach((el, index) => {
+                    setTimeout(() => {
+                        el.classList.add('show');
+                    }, index * 300);
+                });
+            }, 1200);
         });
 
-        // 2. PDF Download Button Loading Effect
-        function handlePdfDownload() {
+        // 3. Download Button Delay & PDF Modal Logic
+        function openPdfModal() {
             const btnText = document.getElementById('btn-text');
-            const downloadBtn = document.getElementById('download-btn');
-            
-            // Set Loading state on button
-            btnText.innerText = "جاري فتح الوثيقة...";
-            downloadBtn.style.opacity = "0.75";
-            downloadBtn.style.pointerEvents = "none";
+            const originalText = btnText.innerText;
+            btnText.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جاري التحميل...';
 
-            // Wait 1.2 seconds, then open document.pdf
-            setTimeout(function() {
-                window.open('document.pdf', '_blank');
-                btnText.innerText = "تحميل الوثيقة";
-                downloadBtn.style.opacity = "1";
-                downloadBtn.style.pointerEvents = "auto";
-            }, 1200);
+            setTimeout(() => {
+                btnText.innerText = originalText;
+                document.getElementById('pdfModal').style.display = 'flex';
+            }, 1500);
         }
 
-        // 3. 30 Days Expiration Logic
-        const EXPIRATION_TIME = 30 * 24 * 60 * 60 * 1000; 
-        let firstVisit = localStorage.getItem('site_first_visit');
-
-        if (!firstVisit) {
-            firstVisit = Date.now();
-            localStorage.setItem('site_first_visit', firstVisit);
-        }
-
-        if ((Date.now() - parseInt(firstVisit, 10)) > EXPIRATION_TIME) {
-            document.getElementById('main-app-content').style.display = 'none';
-            document.getElementById('page-loader').style.display = 'none';
-            document.getElementById('error-screen').style.display = 'block';
+        function closePdfModal() {
+            document.getElementById('pdfModal').style.display = 'none';
         }
     </script>
 </body>
