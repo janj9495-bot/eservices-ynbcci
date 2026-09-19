@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" id="html-root">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نتيجة التحقق من الوثائق - منصة تجار</title>
+    <title id="page-title">نتيجة التحقق من الوثائق - منصة تجار</title>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -22,6 +22,12 @@
             color: #333333;
             direction: rtl;
             overflow-y: auto;
+        }
+
+        /* LTR adjustments when language is set to English */
+        html[dir="ltr"] body {
+            direction: ltr;
+            text-align: left;
         }
 
         /* Full Page Loader */
@@ -137,6 +143,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 5px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .icon-btn:hover {
+            background-color: #f3f4f6;
         }
 
         .tujar-logo {
@@ -164,6 +177,101 @@
             color: #00875a;
             display: block;
             letter-spacing: 0.5px;
+        }
+
+        /* Slide-out Menu Overlay & Sidebar */
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .side-menu {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 280px;
+            height: 100%;
+            background: #ffffff;
+            z-index: 2001;
+            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+            transition: right 0.3s ease, left 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        html[dir="ltr"] .side-menu {
+            right: auto;
+            left: -300px;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .side-menu.active {
+            right: 0;
+        }
+
+        html[dir="ltr"] .side-menu.active {
+            left: 0;
+        }
+
+        .menu-header {
+            padding: 20px;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .menu-header h3 {
+            font-size: 16px;
+            color: #00875a;
+        }
+
+        .menu-close-btn {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #6b7280;
+        }
+
+        .menu-links {
+            list-style: none;
+            padding: 20px;
+        }
+
+        .menu-links li {
+            margin-bottom: 15px;
+        }
+
+        .menu-links a {
+            text-decoration: none;
+            color: #374151;
+            font-weight: 600;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px;
+            border-radius: 6px;
+            transition: background 0.2s;
+        }
+
+        .menu-links a:hover {
+            background-color: #ecfdf5;
+            color: #00875a;
         }
 
         /* Main Content Animation Steps */
@@ -207,6 +315,10 @@
             font-size: 18px;
             text-decoration: none;
             margin-top: 2px;
+        }
+
+        html[dir="ltr"] .back-btn i {
+            transform: rotate(180deg);
         }
 
         .card-header h2 {
@@ -313,6 +425,11 @@
             padding-right: 10px;
         }
 
+        html[dir="ltr"] .timeline-container {
+            padding-right: 0;
+            padding-left: 10px;
+        }
+
         .timeline-step {
             display: flex;
             align-items: flex-start;
@@ -397,14 +514,12 @@
             max-width: 600px;
         }
 
-        /* Footer SVG Logos Section - Matched Exact Design */
         .footer-logos-wrapper {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 20px;
             margin: 30px 0 20px;
-            direction: rtl;
         }
 
         .footer-logo-box {
@@ -440,6 +555,11 @@
             text-decoration: none;
         }
 
+        html[dir="ltr"] .whatsapp-float {
+            right: auto;
+            left: 20px;
+        }
+
         @media (max-width: 640px) {
             .details-grid {
                 grid-template-columns: 1fr;
@@ -452,7 +572,7 @@
     <!-- Loading Animation Screen -->
     <div id="page-loader">
         <div class="spinner"></div>
-        <div class="loader-text">جاري جلب بيانات الوثيقة...</div>
+        <div class="loader-text" id="loader-txt">جاري جلب بيانات الوثيقة...</div>
     </div>
 
     <!-- Error Screen -->
@@ -467,13 +587,28 @@
         </div>
     </div>
 
+    <!-- Side Menu Drawer -->
+    <div class="menu-overlay" id="menu-overlay" onclick="toggleMenu()"></div>
+    <div class="side-menu" id="side-menu">
+        <div class="menu-header">
+            <h3 id="menu-title">القائمة الرئيسية</h3>
+            <button class="menu-close-btn" onclick="toggleMenu()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <ul class="menu-links">
+            <li><a href="#"><i class="fa-solid fa-house"></i> <span id="m-home">الرئيسية</span></a></li>
+            <li><a href="#"><i class="fa-solid fa-file-circle-check"></i> <span id="m-verify">التحقق من الوثائق</span></a></li>
+            <li><a href="#"><i class="fa-solid fa-circle-info"></i> <span id="m-about">عن المنصة</span></a></li>
+            <li><a href="#"><i class="fa-solid fa-headset"></i> <span id="m-contact">الدعم الفني</span></a></li>
+        </ul>
+    </div>
+
     <!-- Main Web Page Container -->
     <div id="main-app-content">
 
         <!-- Header -->
         <header class="header-bar">
             <div class="header-left">
-                <button class="icon-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+                <button class="icon-btn" aria-label="Menu" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></button>
             </div>
             <div class="header-center">
                 <a href="#" class="tujar-logo">
@@ -489,7 +624,10 @@
                 </a>
             </div>
             <div class="header-right">
-                <button class="icon-btn" aria-label="Language"><i class="fa-solid fa-language" style="font-size: 24px;"></i></button>
+                <!-- Language Toggle Button -->
+                <button class="icon-btn" id="lang-btn" aria-label="Language" onclick="toggleLanguage()">
+                    <i class="fa-solid fa-language" style="font-size: 24px;"></i>
+                </button>
             </div>
         </header>
 
@@ -501,57 +639,57 @@
                 <div class="card-header">
                     <a href="#" class="back-btn"><i class="fa-solid fa-arrow-right"></i></a>
                     <div>
-                        <h2>نتيجة التحقق من الوثائق</h2>
-                        <p class="subtitle">خدمة تتيح التحقق من الوثائق التي تم تصديقها إلكترونياً عبر بوابة خدمات المشتركين.</p>
+                        <h2 id="title-doc">نتيجة التحقق من الوثائق</h2>
+                        <p class="subtitle" id="sub-doc">خدمة تتيح التحقق من الوثائق التي تم تصديقها إلكترونياً عبر بوابة خدمات المشتركين.</p>
                     </div>
                 </div>
 
                 <div class="details-grid">
                     <div class="detail-item">
                         <div class="icon-box"><i class="fa-regular fa-building"></i></div>
-                        <div><span class="label">اسم الغرفة</span><span class="value">عنيزة</span></div>
+                        <div><span class="label" id="lbl-chamber">اسم الغرفة</span><span class="value" id="val-chamber">عنيزة</span></div>
                     </div>
                     <div class="detail-item">
                         <div class="icon-box"><i class="fa-regular fa-file-lines"></i></div>
-                        <div><span class="label">الخدمة</span><span class="value">تصديق المطبوعات الرسمية</span></div>
+                        <div><span class="label" id="lbl-service">الخدمة</span><span class="value" id="val-service">تصديق المطبوعات الرسمية</span></div>
                     </div>
                     <div class="detail-item">
                         <div class="icon-box"><i class="fa-solid fa-hashtag"></i></div>
-                        <div><span class="label">رقم الوثيقة</span><span class="value">602-29228</span></div>
+                        <div><span class="label" id="lbl-docnum">رقم الوثيقة</span><span class="value">602-29228</span></div>
                     </div>
                     <div class="detail-item">
                         <div class="icon-box"><i class="fa-regular fa-user"></i></div>
-                        <div><span class="label">مقدم الطلب</span><span class="value">ماجد سعيد الشهراني</span></div>
+                        <div><span class="label" id="lbl-applicant">مقدم الطلب</span><span class="value" id="val-applicant">ماجد سعيد الشهراني</span></div>
                     </div>
                     <div class="detail-item">
                         <div class="icon-box"><i class="fa-solid fa-store"></i></div>
-                        <div><span class="label">اسم المنشأة</span><span class="value">نقليات ماجد سعيد الشهراني</span></div>
+                        <div><span class="label" id="lbl-facility">اسم المنشأة</span><span class="value" id="val-facility">نقليات ماجد سعيد الشهراني</span></div>
                     </div>
                     <div class="detail-item">
                         <div class="icon-box"><i class="fa-solid fa-id-card"></i></div>
-                        <div><span class="label">رقم العضوية</span><span class="value">602008295905</span></div>
+                        <div><span class="label" id="lbl-membernum">رقم العضوية</span><span class="value">602008295905</span></div>
                     </div>
                     <div class="detail-item">
                         <div class="icon-box"><i class="fa-solid fa-barcode"></i></div>
-                        <div><span class="label">الرقم الموحد</span><span class="value">7036578065</span></div>
+                        <div><span class="label" id="lbl-unifiednum">الرقم الموحد</span><span class="value">7036578065</span></div>
                     </div>
                     <div class="detail-item">
                         <div class="icon-box"><i class="fa-regular fa-calendar-days"></i></div>
-                        <div><span class="label">تاريخ ووقت الإنشاء</span><span class="value">2026-09-19 - 07:15</span></div>
+                        <div><span class="label" id="lbl-createdate">تاريخ ووقت الإنشاء</span><span class="value">2026-09-19 - 07:15</span></div>
                     </div>
                     <div class="detail-item">
                         <div class="icon-box"><i class="fa-solid fa-check-double"></i></div>
-                        <div><span class="label">حالة الوثيقة</span><span class="value status-badge"><span class="dot"></span> مقبول - ساري</span></div>
+                        <div><span class="label" id="lbl-status">حالة الوثيقة</span><span class="value status-badge"><span class="dot"></span> <span id="val-status">مقبول - ساري</span></span></div>
                     </div>
                 </div>
 
                 <div class="card-actions">
-                    <!-- Button with Arabic Text: تحميل الوثيقة (PDF) -->
+                    <!-- Download Button -->
                     <a href="waqar%20ahmed%20chamber%20agreement.pdf" download="waqar ahmed chamber agreement.pdf" target="_blank" class="btn btn-primary" id="download-btn">
                         <i class="fa-solid fa-file-pdf"></i>
-                        <span>تحميل الوثيقة (PDF)</span>
+                        <span id="btn-download">تحميل الوثيقة (PDF)</span>
                     </a>
-                    <button class="btn btn-secondary">إعادة تحقق</button>
+                    <button class="btn btn-secondary" id="btn-reverify">إعادة تحقق</button>
                 </div>
             </section>
 
@@ -560,24 +698,24 @@
                 <div class="timeline-step">
                     <div class="step-circle"><i class="fa-solid fa-check"></i></div>
                     <div class="step-details">
-                        <h4>الاستعلام بالرقم المرجعي</h4>
-                        <p>البحث عن وثيقة قائمة العمليات</p>
+                        <h4 id="t1-head">الاستعلام بالرقم المرجعي</h4>
+                        <p id="t1-sub">البحث عن وثيقة قائمة العمليات</p>
                     </div>
                 </div>
                 <div class="timeline-line"></div>
                 <div class="timeline-step">
                     <div class="step-circle"><i class="fa-solid fa-check"></i></div>
                     <div class="step-details">
-                        <h4>التحقق من صحة المعرف</h4>
-                        <p>أدخل بيانات العضوية أو الجهة التابعة لك</p>
+                        <h4 id="t2-head">التحقق من صحة المعرف</h4>
+                        <p id="t2-sub">أدخل بيانات العضوية أو الجهة التابعة لك</p>
                     </div>
                 </div>
                 <div class="timeline-line"></div>
                 <div class="timeline-step">
                     <div class="step-circle"><i class="fa-solid fa-check"></i></div>
                     <div class="step-details">
-                        <h4>التحقق عبر عرض بيانات الوثيقة وتحميلها</h4>
-                        <p>التحقق عبر عرض بيانات الوثيقة وتحميلها</p>
+                        <h4 id="t3-head">التحقق عبر عرض بيانات الوثيقة وتحميلها</h4>
+                        <p id="t3-sub">التحقق عبر عرض بيانات الوثيقة وتحميلها</p>
                     </div>
                 </div>
             </section>
@@ -587,18 +725,18 @@
         <!-- Fully Matched Footer -->
         <footer class="footer animate-cascade">
             <div class="footer-block">
-                <h3>أقسام مهمة</h3>
+                <h3 id="f-sec1">أقسام مهمة</h3>
                 <ul class="footer-links-list">
-                    <li><a href="#">الأسئلة الشائعة</a></li>
-                    <li><a href="#">سياسة الخصوصية</a></li>
-                    <li><a href="#">الشروط والأحكام</a></li>
+                    <li><a href="#" id="f-faq">الأسئلة الشائعة</a></li>
+                    <li><a href="#" id="f-privacy">سياسة الخصوصية</a></li>
+                    <li><a href="#" id="f-terms">الشروط والأحكام</a></li>
                 </ul>
             </div>
 
             <div class="footer-divider"></div>
 
             <div class="footer-block">
-                <h3>روابط أخرى</h3>
+                <h3 id="f-sec2">روابط أخرى</h3>
                 <ul class="footer-links-list">
                     <li><a href="mailto:HD@elm.sa" style="text-decoration: underline;">HD@elm.sa</a></li>
                 </ul>
@@ -607,19 +745,18 @@
             <div class="footer-divider"></div>
 
             <div class="footer-block">
-                <h3>روابط خارجية</h3>
+                <h3 id="f-sec3">روابط خارجية</h3>
                 <ul class="footer-links-list">
-                    <li><a href="#" style="color: #00875a; font-weight: 600;">وزارة التجارة</a></li>
-                    <li><a href="#">وزارة الصناعة والثروة المعدنية</a></li>
-                    <li><a href="#">هيئة الزكاة والضريبة والجمارك</a></li>
-                    <li><a href="#">الموارد البشرية والتنمية الاجتماعية</a></li>
+                    <!-- Original Ministry Websites Links -->
+                    <li><a href="https://mc.gov.sa" target="_blank" style="color: #00875a; font-weight: 600;" id="f-mc">وزارة التجارة</a></li>
+                    <li><a href="https://mim.gov.sa" target="_blank" id="f-mim">وزارة الصناعة والثروة المعدنية</a></li>
+                    <li><a href="https://zatca.gov.sa" target="_blank" id="f-zatca">هيئة الزكاة والضريبة والجمارك</a></li>
+                    <li><a href="https://hrsd.gov.sa" target="_blank" id="f-hrsd">الموارد البشرية والتنمية الاجتماعية</a></li>
                 </ul>
             </div>
 
-            <!-- SVG Embedded Logos (Exact Match Design) -->
+            <!-- SVG Embedded Logos -->
             <div class="footer-logos-wrapper">
-                
-                <!-- 1. Federation of Saudi Chambers Logo -->
                 <div class="footer-logo-box">
                     <svg width="170" height="65" viewBox="0 0 170 65" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g fill="#5eb3d6">
@@ -635,7 +772,6 @@
                     </svg>
                 </div>
 
-                <!-- 2. Ministry of Commerce Logo -->
                 <div class="footer-logo-box">
                     <svg width="100" height="65" viewBox="0 0 100 65" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect x="25" y="2" width="50" height="38" rx="3" fill="#004d38"/>
@@ -646,10 +782,9 @@
                         <text x="50" y="58" fill="#004d38" font-size="6" font-weight="600" text-anchor="middle">Ministry of Commerce</text>
                     </svg>
                 </div>
-
             </div>
 
-            <div class="footer-copyright">
+            <div class="footer-copyright" id="f-copy">
                 اتحاد الغرف السعودية. جميع الحقوق محفوظة © 2026<br>
                 موقع حكومي مسجّل لدى هيئة الحكومة الرقمية
             </div>
@@ -663,7 +798,7 @@
     </div>
 
     <script>
-        // 1. 30 Days Expiry Check
+        // 1. Expiry Check
         const EXPIRY_PERIOD = 30 * 24 * 60 * 60 * 1000;
         let siteStartTime = localStorage.getItem('tujar_start_time');
 
@@ -677,7 +812,7 @@
             document.getElementById('error-screen').style.display = 'block';
         }
 
-        // 2. Step-by-Step Page Reveal Animation
+        // 2. Page Reveal Animation
         window.addEventListener('load', () => {
             setTimeout(() => {
                 const loader = document.getElementById('page-loader');
@@ -692,6 +827,159 @@
                 });
             }, 1200);
         });
+
+        // 3. Side Menu Function
+        function toggleMenu() {
+            document.getElementById('side-menu').classList.toggle('active');
+            document.getElementById('menu-overlay').classList.toggle('active');
+        }
+
+        // 4. Multi-Language Switcher (Arabic <-> English)
+        let currentLang = 'ar';
+
+        const i18n = {
+            ar: {
+                title: "نتيجة التحقق من الوثائق - منصة تجار",
+                loader: "جاري جلب بيانات الوثيقة...",
+                menuTitle: "القائمة الرئيسية",
+                mHome: "الرئيسية",
+                mVerify: "التحقق من الوثائق",
+                mAbout: "عن المنصة",
+                mContact: "الدعم الفني",
+                titleDoc: "نتيجة التحقق من الوثائق",
+                subDoc: "خدمة تتيح التحقق من الوثائق التي تم تصديقها إلكترونياً عبر بوابة خدمات المشتركين.",
+                lblChamber: "اسم الغرفة",
+                valChamber: "عنيزة",
+                lblService: "الخدمة",
+                valService: "تصديق المطبوعات الرسمية",
+                lblDocnum: "رقم الوثيقة",
+                lblApplicant: "مقدم الطلب",
+                valApplicant: "ماجد سعيد الشهراني",
+                lblFacility: "اسم المنشأة",
+                valFacility: "نقليات ماجد سعيد الشهراني",
+                lblMembernum: "رقم العضوية",
+                lblUnifiednum: "الرقم الموحد",
+                lblCreatedate: "تاريخ ووقت الإنشاء",
+                lblStatus: "حالة الوثيقة",
+                valStatus: "مقبول - ساري",
+                btnDownload: "تحميل الوثيقة (PDF)",
+                btnReverify: "إعادة تحقق",
+                t1Head: "الاستعلام بالرقم المرجعي",
+                t1Sub: "البحث عن وثيقة قائمة العمليات",
+                t2Head: "التحقق من صحة المعرف",
+                t2Sub: "أدخل بيانات العضوية أو الجهة التابعة لك",
+                t3Head: "التحقق عبر عرض بيانات الوثيقة وتحميلها",
+                t3Sub: "التحقق عبر عرض بيانات الوثيقة وتحميلها",
+                fSec1: "أقسام مهمة",
+                fFaq: "الأسئلة الشائعة",
+                fPrivacy: "سياسة الخصوصية",
+                fTerms: "الشروط والأحكام",
+                fSec2: "روابط أخرى",
+                fSec3: "روابط خارجية",
+                fMc: "وزارة التجارة",
+                fMim: "وزارة الصناعة والثروة المعدنية",
+                fZatca: "هيئة الزكاة والضريبة والجمارك",
+                fHrsd: "الموارد البشرية والتنمية الاجتماعية",
+                fCopy: "اتحاد الغرف السعودية. جميع الحقوق محفوظة © 2026<br>موقع حكومي مسجّل لدى هيئة الحكومة الرقمية"
+            },
+            en: {
+                title: "Document Verification Result - Tujar Platform",
+                loader: "Fetching document data...",
+                menuTitle: "Main Menu",
+                mHome: "Home",
+                mVerify: "Document Verification",
+                mAbout: "About Platform",
+                mContact: "Technical Support",
+                titleDoc: "Document Verification Result",
+                subDoc: "A service that allows verifying documents authenticated electronically through the subscriber portal.",
+                lblChamber: "Chamber Name",
+                valChamber: "Unaizah",
+                lblService: "Service",
+                valService: "Official Publications Attestation",
+                lblDocnum: "Document Number",
+                lblApplicant: "Applicant Name",
+                valApplicant: "Majid Saeed Al-Shahrani",
+                lblFacility: "Facility Name",
+                valFacility: "Majid Saeed Al-Shahrani Transport",
+                lblMembernum: "Membership Number",
+                lblUnifiednum: "Unified Number",
+                lblCreatedate: "Creation Date & Time",
+                lblStatus: "Document Status",
+                valStatus: "Accepted - Valid",
+                btnDownload: "Download Document (PDF)",
+                btnReverify: "Re-verify",
+                t1Head: "Inquire by Reference Number",
+                t1Sub: "Search for a document in the operations list",
+                t2Head: "Verify Identifier Validity",
+                t2Sub: "Enter membership details or affiliated entity",
+                t3Head: "Verification via View and Download",
+                t3Sub: "Verification via viewing document details and downloading it",
+                fSec1: "Important Sections",
+                fFaq: "FAQ",
+                fPrivacy: "Privacy Policy",
+                fTerms: "Terms & Conditions",
+                fSec2: "Other Links",
+                fSec3: "External Links",
+                fMc: "Ministry of Commerce",
+                fMim: "Ministry of Industry & Mineral Resources",
+                fZatca: "Zakat, Tax and Customs Authority",
+                fHrsd: "Ministry of Human Resources",
+                fCopy: "Federation of Saudi Chambers. All Rights Reserved © 2026<br>A registered government website with DGA"
+            }
+        };
+
+        function toggleLanguage() {
+            currentLang = (currentLang === 'ar') ? 'en' : 'ar';
+            const html = document.getElementById('html-root');
+            const data = i18n[currentLang];
+
+            // Change Text & Direction
+            html.setAttribute('lang', currentLang);
+            html.setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
+
+            document.getElementById('page-title').innerText = data.title;
+            document.getElementById('loader-txt').innerText = data.loader;
+            document.getElementById('menu-title').innerText = data.menuTitle;
+            document.getElementById('m-home').innerText = data.mHome;
+            document.getElementById('m-verify').innerText = data.mVerify;
+            document.getElementById('m-about').innerText = data.mAbout;
+            document.getElementById('m-contact').innerText = data.mContact;
+            document.getElementById('title-doc').innerText = data.titleDoc;
+            document.getElementById('sub-doc').innerText = data.subDoc;
+            document.getElementById('lbl-chamber').innerText = data.lblChamber;
+            document.getElementById('val-chamber').innerText = data.valChamber;
+            document.getElementById('lbl-service').innerText = data.lblService;
+            document.getElementById('val-service').innerText = data.valService;
+            document.getElementById('lbl-docnum').innerText = data.lblDocnum;
+            document.getElementById('lbl-applicant').innerText = data.lblApplicant;
+            document.getElementById('val-applicant').innerText = data.valApplicant;
+            document.getElementById('lbl-facility').innerText = data.lblFacility;
+            document.getElementById('val-facility').innerText = data.valFacility;
+            document.getElementById('lbl-membernum').innerText = data.lblMembernum;
+            document.getElementById('lbl-unifiednum').innerText = data.lblUnifiednum;
+            document.getElementById('lbl-createdate').innerText = data.lblCreatedate;
+            document.getElementById('lbl-status').innerText = data.lblStatus;
+            document.getElementById('val-status').innerText = data.valStatus;
+            document.getElementById('btn-download').innerText = data.btnDownload;
+            document.getElementById('btn-reverify').innerText = data.btnReverify;
+            document.getElementById('t1-head').innerText = data.t1Head;
+            document.getElementById('t1-sub').innerText = data.t1Sub;
+            document.getElementById('t2-head').innerText = data.t2Head;
+            document.getElementById('t2-sub').innerText = data.t2Sub;
+            document.getElementById('t3-head').innerText = data.t3Head;
+            document.getElementById('t3-sub').innerText = data.t3Sub;
+            document.getElementById('f-sec1').innerText = data.fSec1;
+            document.getElementById('f-faq').innerText = data.fFaq;
+            document.getElementById('f-privacy').innerText = data.fPrivacy;
+            document.getElementById('f-terms').innerText = data.fTerms;
+            document.getElementById('f-sec2').innerText = data.fSec2;
+            document.getElementById('f-sec3').innerText = data.fSec3;
+            document.getElementById('f-mc').innerText = data.fMc;
+            document.getElementById('f-mim').innerText = data.fMim;
+            document.getElementById('f-zatca').innerText = data.fZatca;
+            document.getElementById('f-hrsd').innerText = data.fHrsd;
+            document.getElementById('f-copy').innerHTML = data.fCopy;
+        }
     </script>
 </body>
 </html>
