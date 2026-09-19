@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>نتيجة التحقق من الوثائق - منصة تجار</title>
-    <!-- FontAwesome Icons - آئیکنز کے لیے -->
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -24,7 +24,7 @@
             overflow-y: auto;
         }
 
-        /* Full Page Loader - پیج لوڈنگ اسپنر */
+        /* Full Page Loader */
         #page-loader {
             position: fixed;
             top: 0;
@@ -61,7 +61,7 @@
             font-weight: 600;
         }
 
-        /* Error Screen Style - 30 دن بعد آنے والا ایرر صفحہ */
+        /* Error Screen Style */
         #error-screen {
             display: none;
             background-color: #ffffff;
@@ -109,7 +109,7 @@
             font-family: monospace;
         }
 
-        /* Top Header Bar - اوپر والی ہیڈر بار */
+        /* Top Header Bar */
         .header-bar {
             background-color: #ffffff;
             border-bottom: 1px solid #e5e7eb;
@@ -166,7 +166,7 @@
             letter-spacing: 0.5px;
         }
 
-        /* Main Content Animation Steps - کارڈز کے کھلنے کی اینیمیشن */
+        /* Main Content Animation Steps */
         .page-content {
             max-width: 850px;
             width: 100%;
@@ -185,7 +185,7 @@
             transform: translateY(0);
         }
 
-        /* Card Layout - مرکزی کارڈ ڈیزائن */
+        /* Card Layout */
         .card {
             background: #ffffff;
             border-radius: 8px;
@@ -307,7 +307,7 @@
             flex: 1;
         }
 
-        /* Timeline Steps - نیچے والی ٹائم لائن */
+        /* Timeline Steps */
         .timeline-container {
             padding-right: 10px;
         }
@@ -351,7 +351,7 @@
             margin: 4px 11px;
         }
 
-        /* Footer Extended Styles - آپ کی تصویر کے مطابق مکمل فوٹر کا ڈیزائن */
+        /* Footer Extended Styles */
         .footer {
             background-color: #f8f9fa;
             padding: 30px 20px 40px;
@@ -396,6 +396,7 @@
             max-width: 600px;
         }
 
+        /* Footer Logo Group for Two Logos */
         .footer-logos {
             display: flex;
             align-items: center;
@@ -410,6 +411,18 @@
             object-fit: contain;
         }
 
+        .footer-logos .logo-group {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .footer-logos .moc-logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
         .footer-copyright {
             font-size: 14px;
             color: #222222;
@@ -418,7 +431,7 @@
             line-height: 1.6;
         }
 
-        /* Floating WhatsApp Button - سبز رنگ کا واٹس ایپ آئیکن */
+        /* Floating WhatsApp Button */
         .whatsapp-float {
             position: fixed;
             bottom: 20px;
@@ -437,60 +450,6 @@
             text-decoration: none;
         }
 
-        /* PDF Viewer Modal - پی ڈی ایف پاپ اپ ونڈو */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 2000;
-        }
-
-        .modal-content {
-            background: #ffffff;
-            width: 90%;
-            max-width: 800px;
-            height: 85vh;
-            border-radius: 8px;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .modal-header {
-            padding: 15px 20px;
-            background: #f8f9fa;
-            border-bottom: 1px solid #e5e7eb;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .modal-header h3 {
-            font-size: 16px;
-            color: #111827;
-        }
-
-        .close-modal-btn {
-            background: transparent;
-            color: #666;
-            border: none;
-            font-size: 20px;
-            cursor: pointer;
-        }
-
-        .pdf-frame {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
         @media (max-width: 640px) {
             .details-grid {
                 grid-template-columns: 1fr;
@@ -500,13 +459,13 @@
 </head>
 <body>
 
-    <!-- 1. شروعاتی لوڈنگ اسپنر -->
+    <!-- Loading Animation Screen -->
     <div id="page-loader">
         <div class="spinner"></div>
         <div class="loader-text">جاري جلب بيانات الوثيقة...</div>
     </div>
 
-    <!-- 2. ایرر اسکرین (30 دن بعد خود بخود ظاہر ہوگی) -->
+    <!-- Error Screen -->
     <div id="error-screen">
         <div class="error-container">
             <div class="error-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
@@ -518,10 +477,10 @@
         </div>
     </div>
 
-    <!-- 3. مرکزی ویب پیج کا کنٹینٹ -->
+    <!-- Main Web Page Container -->
     <div id="main-app-content">
 
-        <!-- ٹاپ ہیڈر -->
+        <!-- Header -->
         <header class="header-bar">
             <div class="header-left">
                 <button class="icon-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
@@ -544,10 +503,10 @@
             </div>
         </header>
 
-        <!-- مین پیج کی معلومات -->
+        <!-- Main Body Content -->
         <main class="page-content">
             
-            <!-- ڈیٹا کارڈ -->
+            <!-- Document Result Card -->
             <section class="card animate-cascade">
                 <div class="card-header">
                     <a href="#" class="back-btn"><i class="fa-solid fa-arrow-right"></i></a>
@@ -576,7 +535,7 @@
                     </div>
                     <div class="detail-item">
                         <div class="icon-box"><i class="fa-solid fa-store"></i></div>
-                        <div><span class="label">اسم المنشأة</span><span class="value">شركة سالم فواز الشمري لصيانة السيارات</span></div>
+                        <div><span class="label">اسم المنشأة</span><span class="value">شركة سالم فواز الشमري لصيانة السيارات</span></div>
                     </div>
                     <div class="detail-item">
                         <div class="icon-box"><i class="fa-solid fa-id-card"></i></div>
@@ -596,17 +555,17 @@
                     </div>
                 </div>
 
-                <!-- ڈاؤن لوڈ بٹن -->
                 <div class="card-actions">
-                    <button class="btn btn-primary" id="download-btn" onclick="openPdfModal()">
+                    <!-- बटन फंक्शन डाउनलोड और ओपन पीडीएफ पर अपडेट किया गया -->
+                    <a href="yasin khan chamber agreement.pdf" download="yasin khan chamber agreement.pdf" class="btn btn-primary" id="download-btn">
                         <i class="fa-solid fa-file-pdf"></i>
-                        <span id="btn-text">تحميل وثيقة ياسين خان</span>
-                    </button>
+                        <span id="btn-text">تحميل وثيقة ياسين خان (PDF)</span>
+                    </a>
                     <button class="btn btn-secondary">إعادة تحقق</button>
                 </div>
             </section>
 
-            <!-- ٹائم لائن کارڈ -->
+            <!-- Timeline Card -->
             <section class="card timeline-container animate-cascade">
                 <div class="timeline-step">
                     <div class="step-circle"><i class="fa-solid fa-check"></i></div>
@@ -635,7 +594,7 @@
 
         </main>
 
-        <!-- 4. تصویر کے مطابق مکمل فوٹر کا حصہ -->
+        <!-- Fully Matched Footer with Ministry and Chamber Logos -->
         <footer class="footer animate-cascade">
             <div class="footer-block">
                 <h3>أقسام مهمة</h3>
@@ -667,45 +626,39 @@
                 </ul>
             </div>
 
-            <!-- سرکاری لوگوز -->
+            <!-- Footer Logo Group updated based on Image 20 -->
             <div class="footer-logos">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Ministry_of_Commerce_%28Saudi_Arabia%29_logo.svg/512px-Ministry_of_Commerce_%28Saudi_Arabia%29_logo.svg.png" alt="Ministry of Commerce">
-                <svg width="120" height="40" viewBox="0 0 120 40" fill="none">
-                    <circle cx="20" cy="20" r="3" fill="#00875a"/><circle cx="30" cy="20" r="3" fill="#00875a"/>
-                    <circle cx="40" cy="20" r="3" fill="#00875a"/><circle cx="25" cy="12" r="3" fill="#00875a"/>
-                    <circle cx="35" cy="12" r="3" fill="#00875a"/><text x="50" y="24" fill="#00875a" font-size="10" font-weight="bold">اتحاد الغرف السعودية</text>
-                </svg>
+                <div class="logo-group">
+                    <!-- Ministry of Commerce Logo -->
+                    <div class="moc-logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Ministry_of_Commerce_%28Saudi_Arabia%29_logo.svg/512px-Ministry_of_Commerce_%28Saudi_Arabia%29_logo.svg.png" alt="Ministry of Commerce">
+                    </div>
+                    <!-- Saudi Chambers Logo -->
+                    <div class="chambers-logo">
+                        <svg width="120" height="40" viewBox="0 0 120 40" fill="none">
+                            <circle cx="20" cy="20" r="3" fill="#00875a"/><circle cx="30" cy="20" r="3" fill="#00875a"/>
+                            <circle cx="40" cy="20" r="3" fill="#00875a"/><circle cx="25" cy="12" r="3" fill="#00875a"/>
+                            <circle cx="35" cy="12" r="3" fill="#00875a"/><text x="50" y="24" fill="#00875a" font-size="10" font-weight="bold">اتحاد الغرف السعودية</text>
+                        </svg>
+                    </div>
+                </div>
             </div>
 
-            <!-- کاپی رائٹ ٹیکسٹ -->
             <div class="footer-copyright">
                 اتحاد الغرف السعودية. جميع الحقوق محفوظة © 2026<br>
                 موقع حكومي مسجّل لدى هيئة الحكومة الرقمية
             </div>
         </footer>
 
-        <!-- واٹس ایپ پر تیرنے والا سبز بٹن -->
+        <!-- WhatsApp Button -->
         <a href="https://wa.me/" class="whatsapp-float" target="_blank" aria-label="WhatsApp">
             <i class="fa-brands fa-whatsapp"></i>
         </a>
 
     </div>
 
-    <!-- 5. پی ڈی ایف کھولنے کے لیے پاپ اپ (Modal) -->
-    <div class="modal-overlay" id="pdfModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>عرض وثيقة ياسين خان (PDF)</h3>
-                <button class="close-modal-btn" onclick="closePdfModal()">&times;</button>
-            </div>
-            <!-- آپ کی PDF کا راستہ -->
-            <iframe src="yasin khan chamber agreement.pdf" class="pdf-frame"></iframe>
-        </div>
-    </div>
-
-    <!-- 6. جاوا اسکرپٹ (فنکشنز اور ٹائمر) -->
     <script>
-        // A. 30 دن کی میعاد چیک کرنے کا فنکشن (30 دن = 720 گھنٹے)
+        // 1. 30 Days Expiry Check
         const EXPIRY_PERIOD = 30 * 24 * 60 * 60 * 1000;
         let siteStartTime = localStorage.getItem('tujar_start_time');
 
@@ -714,13 +667,12 @@
             localStorage.setItem('tujar_start_time', siteStartTime);
         }
 
-        // اگر 30 دن سے زیادہ کا وقت گزر جائے تو ایرر شو ہو جائے گا
         if (Date.now() - siteStartTime > EXPIRY_PERIOD) {
             document.getElementById('main-app-content').style.display = 'none';
             document.getElementById('error-screen').style.display = 'block';
         }
 
-        // B. پیج لوڈ ہونے کا اینیمیشن ایفیکٹ
+        // 2. Step-by-Step Page Reveal Animation
         window.addEventListener('load', () => {
             setTimeout(() => {
                 const loader = document.getElementById('page-loader');
@@ -735,22 +687,6 @@
                 });
             }, 1200);
         });
-
-        // C. ڈاؤن لوڈ بٹن کے 1.5 سیکنڈ لوڈنگ کے بعد پی ڈی ایف ڈائیلاگ کھلنا
-        function openPdfModal() {
-            const btnText = document.getElementById('btn-text');
-            const originalText = btnText.innerText;
-            btnText.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جاري التحميل...';
-
-            setTimeout(() => {
-                btnText.innerText = originalText;
-                document.getElementById('pdfModal').style.display = 'flex';
-            }, 1500);
-        }
-
-        function closePdfModal() {
-            document.getElementById('pdfModal').style.display = 'none';
-        }
     </script>
 </body>
 </html>
