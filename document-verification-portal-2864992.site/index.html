@@ -24,7 +24,7 @@
             overflow-y: auto;
         }
 
-        /* Error Screen Style (Hidden by default) */
+        /* Error Screen Style */
         #error-screen {
             display: none;
             background-color: #ffffff;
@@ -244,6 +244,8 @@
             font-weight: 600;
             font-size: 13px;
             text-align: center;
+            text-decoration: none;
+            display: inline-block;
         }
 
         .btn-primary {
@@ -302,7 +304,7 @@
             margin: 4px 11px;
         }
 
-        /* Footer Section */
+        /* Footer Style */
         .footer {
             background-color: #f8f9fa;
             padding: 30px 20px 20px;
@@ -341,112 +343,6 @@
             display: inline-block;
         }
 
-        .footer-links-list a.email-link {
-            color: #2b6cb0;
-            text-decoration: underline;
-        }
-
-        .footer-links-list a.highlight-green {
-            color: #00875a;
-            font-weight: 700;
-            border-bottom: 2px solid #00875a;
-            padding-bottom: 2px;
-        }
-
-        .footer-logos-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 30px;
-            margin: 30px 0 20px;
-            flex-wrap: wrap;
-        }
-
-        .copyright-title {
-            font-size: 15px;
-            font-weight: 700;
-            color: #1a202c;
-            margin-bottom: 6px;
-        }
-
-        .copyright-subtitle {
-            font-size: 13px;
-            color: #718096;
-        }
-
-        /* Floating WhatsApp Icon */
-        .floating-chat-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #00875a;
-            color: #ffffff;
-            width: 54px;
-            height: 54px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 26px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            cursor: pointer;
-            z-index: 1001;
-        }
-
-        /* Image View Popup Modal Styling */
-        .image-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.85);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .modal-content-wrapper {
-            position: relative;
-            max-width: 95%;
-            max-height: 90vh;
-            background: #ffffff;
-            border-radius: 8px;
-            overflow: auto;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-            padding: 10px;
-            text-align: center;
-        }
-
-        .modal-content-wrapper img {
-            width: 100%;
-            max-width: 600px;
-            height: auto;
-            border-radius: 4px;
-            display: block;
-            margin: 0 auto;
-        }
-
-        .close-modal-btn {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            background: #ea4335;
-            color: #ffffff;
-            border: none;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            font-size: 20px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 2001;
-        }
-
         @media (max-width: 640px) {
             .details-grid {
                 grid-template-columns: 1fr;
@@ -456,7 +352,7 @@
 </head>
 <body>
 
-    <!-- Error Screen (Shows automatically after 24 Hours) -->
+    <!-- Error Screen (Shows after 30 Days) -->
     <div id="error-screen">
         <div class="error-container">
             <div class="error-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
@@ -485,11 +381,6 @@
                         <span class="ar">منصة تجّار</span>
                         <span class="en">Tujar</span>
                     </div>
-                    <svg width="40" height="32" viewBox="0 0 40 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 4L36 4L28 12L4 12L12 4Z" fill="#00875a"/>
-                        <path d="M12 14L36 14L28 22L4 22L12 14Z" fill="#00875a"/>
-                        <path d="M20 24L36 24L32 28L16 28L20 24Z" fill="#00875a"/>
-                    </svg>
                 </a>
             </div>
 
@@ -502,14 +393,12 @@
 
         <!-- Main Body Content -->
         <main class="page-content">
-            
-            <!-- Document Result Card -->
             <section class="card">
                 <div class="card-header">
                     <a href="#" class="back-btn"><i class="fa-solid fa-arrow-right"></i></a>
                     <div>
                         <h2>نتيجة التحقق من الوثائق</h2>
-                        <p class="subtitle">خدمة تتيح التحقق من الوثائق التي تم تصديقها إلكترونياً عبر بوابة خدمات المشتركين، وللتحقق من شهادة الاشتراك الرجاء إدخال الرقم المرجعي الخاص بالوثيقة.</p>
+                        <p class="subtitle">خدمة تتيح التحقق من الوثائق التي تم تصديقها إلكترونياً عبر بوابة خدمات المشتركين.</p>
                     </div>
                 </div>
 
@@ -588,11 +477,10 @@
                     </div>
                 </div>
 
-                <!-- Buttons -->
+                <!-- Buttons Link to PDF -->
                 <div class="card-actions">
-                    <!-- Event added to open image popup -->
-                    <button class="btn btn-primary" onclick="openDocumentModal()">تحميل الوثيقة</button>
-                    <button class="btn btn-secondary" onclick="location.reload()">إعادة تحقق</button>
+                    <a href="document.pdf" target="_blank" class="btn btn-primary">تحميل الوثيقة</a>
+                    <button class="btn btn-secondary" onclick="location.reload();">إعادة تحقق</button>
                 </div>
             </section>
 
@@ -605,9 +493,7 @@
                         <p>البحث عن وثيقة قائمة العمليات</p>
                     </div>
                 </div>
-
                 <div class="timeline-line"></div>
-
                 <div class="timeline-step">
                     <div class="step-circle"><i class="fa-solid fa-check"></i></div>
                     <div class="step-details">
@@ -615,9 +501,7 @@
                         <p>أدخل بيانات العضوية أو الجهة التابعة لك</p>
                     </div>
                 </div>
-
                 <div class="timeline-line"></div>
-
                 <div class="timeline-step">
                     <div class="step-circle"><i class="fa-solid fa-check"></i></div>
                     <div class="step-details">
@@ -626,137 +510,28 @@
                     </div>
                 </div>
             </section>
-
         </main>
-
-        <!-- Footer Section Exact Match -->
-        <footer class="footer">
-            
-            <!-- Block 1: أقسام مهمة -->
-            <div class="footer-block">
-                <h3>أقسام مهمة</h3>
-                <ul class="footer-links-list">
-                    <li><a href="#">الأسئلة الشائعة</a></li>
-                    <li><a href="#">سياسة الخصوصية</a></li>
-                    <li><a href="#">الشروط والأحكام</a></li>
-                </ul>
-            </div>
-
-            <!-- Block 2: روابط أخرى -->
-            <div class="footer-block">
-                <h3>روابط أخرى</h3>
-                <ul class="footer-links-list">
-                    <li><a href="mailto:HD@elm.sa" class="email-link">HD@elm.sa</a></li>
-                </ul>
-            </div>
-
-            <!-- Block 3: روابط خارجية -->
-            <div class="footer-block">
-                <h3>روابط خارجية</h3>
-                <ul class="footer-links-list">
-                    <li><a href="#" class="highlight-green">وزارة التجارة</a></li>
-                    <li><a href="#">وزارة الصناعة والثروة المعدنية</a></li>
-                    <li><a href="#">هيئة الزكاة والضريبة والجمارك</a></li>
-                    <li><a href="#">الموارد البشرية والتنمية الاجتماعية</a></li>
-                </ul>
-            </div>
-
-            <!-- Bottom Logos -->
-            <div class="footer-logos-container">
-                <!-- Ministry Logo -->
-                <div style="display: flex; flex-direction: column; align-items: center;">
-                    <div style="background-color: #005a36; padding: 6px; border-radius: 4px; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px;">
-                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.5">
-                            <path d="M12 2L12 15M12 15L9 12M12 15L15 12" />
-                            <path d="M6 10C6 10 9 7 12 10C15 7 18 10 18 10" />
-                            <path d="M8 20L16 20" />
-                        </svg>
-                    </div>
-                    <span style="font-size: 11px; font-weight: 700; color: #005a36; margin-top: 4px;">وزارة التجارة</span>
-                    <span style="font-size: 8px; color: #005a36;">Ministry of Commerce</span>
-                </div>
-
-                <!-- Chambers Logo -->
-                <div style="display: flex; align-items: center; gap: 8px;">
-                    <svg width="45" height="32" viewBox="0 0 60 40">
-                        <circle cx="20" cy="10" r="2.5" fill="#2b82b3"/>
-                        <circle cx="27" cy="10" r="2.5" fill="#2b82b3"/>
-                        <circle cx="34" cy="10" r="2.5" fill="#2b82b3"/>
-                        <circle cx="16" cy="17" r="2.5" fill="#2b82b3"/>
-                        <circle cx="23" cy="17" r="2.5" fill="#2b82b3"/>
-                        <circle cx="30" cy="17" r="2.5" fill="#2b82b3"/>
-                        <circle cx="37" cy="17" r="2.5" fill="#2b82b3"/>
-                        <circle cx="20" cy="24" r="2.5" fill="#2b82b3"/>
-                        <circle cx="27" cy="24" r="2.5" fill="#2b82b3"/>
-                        <circle cx="34" cy="24" r="2.5" fill="#2b82b3"/>
-                        <circle cx="23" cy="31" r="2.5" fill="#2b82b3"/>
-                        <circle cx="30" cy="31" r="2.5" fill="#2b82b3"/>
-                    </svg>
-                    <span style="font-size: 13px; font-weight: 800; color: #2b82b3;">اتحاد الغرف التجارية السعودية</span>
-                </div>
-            </div>
-
-            <!-- Copyright Text -->
-            <div class="copyright-title">
-                اتحاد الغرف السعودية. جميع الحقوق محفوظة © 2026
-            </div>
-            <div class="copyright-subtitle">
-                موقع حكومي مسجّل لدى هيئة الحكومة الرقمية
-            </div>
-        </footer>
-
-        <!-- Floating Chat Icon -->
-        <div class="floating-chat-btn">
-            <i class="fa-regular fa-comment-dots"></i>
-        </div>
-
     </div>
 
-    <!-- Document Image Popup Modal -->
-    <div id="docModal" class="image-modal">
-        <div class="modal-content-wrapper">
-            <button class="close-modal-btn" onclick="closeDocumentModal()">&times;</button>
-            <img src="document.jpg" alt="Iqama and Driving License Document">
-        </div>
-    </div>
-
-    <!-- Scripts -->
+    <!-- JavaScript to handle 30 Days Expiry -->
     <script>
-        // Open Modal Function
-        function openDocumentModal() {
-            document.getElementById('docModal').style.display = 'flex';
+        // 30 Days in milliseconds (30 days * 24 hrs * 60 mins * 60 secs * 1000 ms)
+        const EXPIRATION_TIME = 30 * 24 * 60 * 60 * 1000; 
+
+        let firstVisit = localStorage.getItem('site_first_visit');
+
+        if (!firstVisit) {
+            firstVisit = Date.now();
+            localStorage.setItem('site_first_visit', firstVisit);
         }
 
-        // Close Modal Function
-        function closeDocumentModal() {
-            document.getElementById('docModal').style.display = 'none';
+        const timePassed = Date.now() - parseInt(firstVisit, 10);
+
+        if (timePassed > EXPIRATION_TIME) {
+            document.getElementById('main-app-content').style.display = 'none';
+            document.getElementById('error-screen').style.display = 'block';
         }
-
-        // Close modal when clicking outside of image
-        window.onclick = function(event) {
-            var modal = document.getElementById('docModal');
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-
-        // 24-Hour Expiry Logic Script
-        (function() {
-            var EXPIRE_HOURS = 24;
-            var expireTimeKey = 'page_expiry_timestamp';
-            var now = new Date().getTime();
-
-            var storedExpiry = localStorage.getItem(expireTimeKey);
-
-            if (!storedExpiry) {
-                var expiryTimestamp = now + (EXPIRE_HOURS * 60 * 60 * 1000);
-                localStorage.setItem(expireTimeKey, expiryTimestamp);
-            } else if (now > parseInt(storedExpiry, 10)) {
-                document.getElementById('main-app-content').style.display = 'none';
-                document.getElementById('error-screen').style.display = 'block';
-                document.title = "404 Not Found - Connection is not private";
-            }
-        })();
     </script>
 </body>
-</html>
+    </html>
+                            
